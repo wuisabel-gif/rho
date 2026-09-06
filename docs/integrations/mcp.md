@@ -2,6 +2,15 @@
 
 Rho can connect native agents to ordinary [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers. MCP support does not require an Agent Plugin package.
 
+## MemoryWhale
+
+[Rho](https://github.com/matthewyjiang/rho) is a separate open-source
+coding-agent project that MemoryWhale's maintainer actively uses and contributes
+to. That hands-on experience led to [MemoryWhale's dedicated Rho
+integration](https://github.com/wuisabel-gif/MemWhale/blob/main/integrations/rho/README.md),
+which supports MCP memory access, optional command-capture hooks, and
+memory-use guidance through a Rho skill.
+
 ## Configuration source and precedence
 
 Add servers under `[mcp.servers]` in Rho's config file. Rho reads `~/.rho/config.toml` by default. To keep project MCP settings with a project, select that file through the existing config override:
