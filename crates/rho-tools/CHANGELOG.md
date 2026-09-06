@@ -1,5 +1,66 @@
 # Changelog
 
+## [2.0.0](https://github.com/wuisabel-gif/rho/compare/rho-agent-tools-v1.0.2...rho-agent-tools-v2.0.0) (2026-09-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* rho-sdk removes RunEvent::ProviderActivity and the PROVIDER_ACTIVITY_* constants, collapses ProviderStreamResetReason retryable variants into RetryableFailure { kind, retry_after }, removes ModelCallMetrics::output_tokens_per_second, adds revision to RunEvent::Failed, folds ContextEstimated into StepStarted, and replaces the stringly generation-output-token carriers with a typed ModelCallMetrics::generation_output_tokens metric and ModelEvent::GenerationOutputTokens variant. rho-providers adds ProviderId::OpenAiCompatible for config-defined hosts, folds CustomProviderOptions into CustomProviderSpec (removing the _with_lookup/ _with_options funnels), makes providers() include custom hosts (removing visible_providers), removes deprecated registry API-base re-exports and ProviderRuntime::same_family, and drops the CredentialStore parameter from OpenAiProvider::new_with_identity. rho-tools removes the edit_file tool-name alias, the write_file frontmatter alias, and the EditToolKind type alias.
+
+### Features
+
+* **acp:** let hosts set reasoning through thought_level ([#1015](https://github.com/wuisabel-gif/rho/issues/1015)) ([5cda8e8](https://github.com/wuisabel-gif/rho/commit/5cda8e8308682fa13c9d6001ec12989f0d030bb4))
+* **config:** mid-session edit tool, advisor, and auto preference ([#840](https://github.com/wuisabel-gif/rho/issues/840)) ([423d026](https://github.com/wuisabel-gif/rho/commit/423d02690edee36a6dc692ac25d8fd9013d33139))
+* **documents:** add bounded document extraction and attachments ([#669](https://github.com/wuisabel-gif/rho/issues/669)) ([d1ec3cd](https://github.com/wuisabel-gif/rho/commit/d1ec3cd5d8f5683c7b8de0047070a6029bb1ec33))
+* **permission:** rename Auto to Bypass and add classifier Auto ([#870](https://github.com/wuisabel-gif/rho/issues/870)) ([3192daa](https://github.com/wuisabel-gif/rho/commit/3192daa713f7202f44727ec4acb83d0c646d1286))
+* **sessions:** add workspace rewind checkpoints ([#638](https://github.com/wuisabel-gif/rho/issues/638)) ([5a90b2d](https://github.com/wuisabel-gif/rho/commit/5a90b2db5b1170f2701cbac1c0c7d056f9158754))
+* **subagents:** add parent-child plain-text messaging for Rho runtime ([#852](https://github.com/wuisabel-gif/rho/issues/852)) ([dd25d8e](https://github.com/wuisabel-gif/rho/commit/dd25d8e3e48fd531e777e31fcad9c948a2a9ebfe))
+* **tools:** add in-process grep and glob workspace tools ([#554](https://github.com/wuisabel-gif/rho/issues/554)) ([e422a99](https://github.com/wuisabel-gif/rho/commit/e422a990332afff330b096d8960d4e0fa07a5838))
+* **tools:** add selectable edit formats ([#820](https://github.com/wuisabel-gif/rho/issues/820)) ([5db37d0](https://github.com/wuisabel-gif/rho/commit/5db37d0bf714afbf28e91e3f0e66c2e8b807b659))
+* **tools:** extract pdf content with pdf-inspector ([#687](https://github.com/wuisabel-gif/rho/issues/687)) ([ce92355](https://github.com/wuisabel-gif/rho/commit/ce92355e74a56ab11d7f2cf35ff3d246e34310d2))
+* **tools:** mint hashline tags only for the hashline edit tool ([#1000](https://github.com/wuisabel-gif/rho/issues/1000)) ([2fa3c2c](https://github.com/wuisabel-gif/rho/commit/2fa3c2c35280f79cb53826cf3cc863421fcd18d0))
+* **tools:** replace edit_file with codex-style apply_patch ([#653](https://github.com/wuisabel-gif/rho/issues/653)) ([eef1555](https://github.com/wuisabel-gif/rho/commit/eef155521c5492b9c7f34507e82b6b7f46b896a8))
+* **tools:** restore simple edit_file ([#658](https://github.com/wuisabel-gif/rho/issues/658)) ([ffac70f](https://github.com/wuisabel-gif/rho/commit/ffac70f6d58d1532a4eedefbdc99463402adbf7b))
+* **tui:** borderless code, mermaid, and math blocks with syntect highlighting ([#825](https://github.com/wuisabel-gif/rho/issues/825)) ([f0614a8](https://github.com/wuisabel-gif/rho/commit/f0614a88d035f0465adbddccc830207d5366450f))
+* **tui:** count up shell runtime next to timeout ([#871](https://github.com/wuisabel-gif/rho/issues/871)) ([7c55124](https://github.com/wuisabel-gif/rho/commit/7c55124aa43fb40db414c7be01ab68e36dfb0441))
+* **tui:** stream apply_patch diff cards ([#657](https://github.com/wuisabel-gif/rho/issues/657)) ([e2c932e](https://github.com/wuisabel-gif/rho/commit/e2c932e377f15ddfaab1e4700aa7d6f4e8ed0417))
+* **tui:** unify tool transcript cards as Call + Children ([#586](https://github.com/wuisabel-gif/rho/issues/586)) ([ce52cdd](https://github.com/wuisabel-gif/rho/commit/ce52cddb6dbf0ac1b2878b6f3bd468a87547f8fa))
+* **xai:** let grok generate and edit images in the conversation ([#967](https://github.com/wuisabel-gif/rho/issues/967)) ([47c03c1](https://github.com/wuisabel-gif/rho/commit/47c03c1d2b13864d32a69b27c21da4db54572e0e))
+
+
+### Bug Fixes
+
+* **agents:** clarify foreground agent batch behavior ([#606](https://github.com/wuisabel-gif/rho/issues/606)) ([9574e48](https://github.com/wuisabel-gif/rho/commit/9574e4836a3c6e14eb28bc5863b8d2abc334e140))
+* **deps:** patch h2, lopdf, webbrowser, and quick-xml CVEs ([#1069](https://github.com/wuisabel-gif/rho/issues/1069)) ([453be34](https://github.com/wuisabel-gif/rho/commit/453be34aadd44faa3063bf813fd14007e95c2774))
+* **errors:** surface failures that were silently swallowed ([#546](https://github.com/wuisabel-gif/rho/issues/546)) ([1d4eee3](https://github.com/wuisabel-gif/rho/commit/1d4eee3ea2e45d459897198d48babbe3ded3bf19))
+* **sdk:** recover failed 1.17.1 release packaging ([#587](https://github.com/wuisabel-gif/rho/issues/587)) ([224189e](https://github.com/wuisabel-gif/rho/commit/224189e2d4fc2ec5f23cb88d80065d82c91ef40b))
+* **sdk:** recover failed 1.32.0 release packaging ([#792](https://github.com/wuisabel-gif/rho/issues/792)) ([a782145](https://github.com/wuisabel-gif/rho/commit/a782145820f2924a47140f9e8cd8e3cbd13be8a3))
+* **tools:** reject shell timeout_seconds of zero consistently ([#843](https://github.com/wuisabel-gif/rho/issues/843)) ([c379aec](https://github.com/wuisabel-gif/rho/commit/c379aeca8ad0dd2ad53a33df66f967782206db78))
+* **tools:** scrub provider credential env vars from child processes ([#502](https://github.com/wuisabel-gif/rho/issues/502)) ([6d66913](https://github.com/wuisabel-gif/rho/commit/6d669135caa7aa160f8c81c109f0c99736b70e63))
+* **tools:** search a named file path ([#1084](https://github.com/wuisabel-gif/rho/issues/1084)) ([f9dc51b](https://github.com/wuisabel-gif/rho/commit/f9dc51b45bf2dd8bdd6eab9bba04ee2e57db5759))
+* **tui:** drop duplicate paths on multi-file edit cards ([#826](https://github.com/wuisabel-gif/rho/issues/826)) ([16c98e3](https://github.com/wuisabel-gif/rho/commit/16c98e3c1898cbb885e71366a940efeaa52aa688))
+* **tui:** paste image paths and fall back kitty under herdr ([#504](https://github.com/wuisabel-gif/rho/issues/504)) ([c140bfe](https://github.com/wuisabel-gif/rho/commit/c140bfe6994f4ffc42756075ec801eff6e63ce40))
+* **tui:** validate dropped file attachments ([#677](https://github.com/wuisabel-gif/rho/issues/677)) ([1c62a3d](https://github.com/wuisabel-gif/rho/commit/1c62a3d638328bc829350f1cf32649fd58f7abcb))
+
+
+### Performance Improvements
+
+* cut hot-path costs in grep, session persistence, and live TUI rendering ([#1027](https://github.com/wuisabel-gif/rho/issues/1027)) ([9cf4ad7](https://github.com/wuisabel-gif/rho/commit/9cf4ad73149ebcaffbe760481618cac9bb02a061))
+* **tools:** cut tokens from web, process, and shell results ([#980](https://github.com/wuisabel-gif/rho/issues/980)) ([c103ec0](https://github.com/wuisabel-gif/rho/commit/c103ec0d6d46896f735074413369cc471c95a750))
+* **tools:** stream hashline digest, zero-alloc grep lines, and dirty-check shell stream ([#927](https://github.com/wuisabel-gif/rho/issues/927)) ([580a774](https://github.com/wuisabel-gif/rho/commit/580a7742e6f268240874bf0df4987353c90bf4b4))
+
+
+### Code Refactoring
+
+* pay down all NEXT_MAJOR debt for the next major, net -986 lines ([#1062](https://github.com/wuisabel-gif/rho/issues/1062)) ([0e17bdb](https://github.com/wuisabel-gif/rho/commit/0e17bdb5e9fa21440fffbbe00171830ac0d1d3c2))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * rho-sdk bumped from 5.1.0 to 6.0.0
+
 ## [1.0.2](https://github.com/matthewyjiang/rho/compare/rho-agent-tools-v1.0.1...rho-agent-tools-v1.0.2) (2026-08-30)
 
 
